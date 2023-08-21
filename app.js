@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
 const csrf = require("csurf");
+const flash = require("connect-flash");
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -37,6 +38,7 @@ app.use(
   })
 );
 app.use(csrfProtection);
+app.use(flash());
 
 app.use((req, res, next) => {
   if (!req.session.user) {
@@ -68,7 +70,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then((result) => {
-    app.listen(3000);
+    app.listen(5000);
     console.log("Connected!");
   })
   .catch((err) => {
